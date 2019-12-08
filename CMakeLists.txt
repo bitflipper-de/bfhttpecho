@@ -12,18 +12,23 @@ endif()
 
 set(CMAKE_CXX_STANDARD 14)
 
-## Dependencies
-
-find_package(Qt5 COMPONENTS Core REQUIRED)
-
 ## Configuration
 
 include(config/version.cmake)
 include(config/default.cmake)
 
+if(EXISTS "${PROJECT_SOURCE_DIR}/config/default.local.cmake")
+    include(config/default.local.cmake)
+endif()
+
 configure_file(config/bfhttpecho.h.in bfhttpecho.h @ONLY)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
+set(CMAKE_AUTOMOC TRUE)
+
+## Dependencies
+
+find_package(Qt5 COMPONENTS Core Network REQUIRED)
 
 ## Code
 
