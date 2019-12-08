@@ -3,6 +3,7 @@
 
 #include "responders/GetResponder.h"
 
+#include <QCoreApplication>
 #include <QDebug>
 #include <QTcpSocket>
 #include <QTcpServer>
@@ -139,4 +140,8 @@ void HttpEcho::newConnection() {
     socket->waitForBytesWritten(3000);
 
     socket->close();
+
+    if (parsed_request.route.startsWith("/kill")) {
+        qApp->exit(0);
+    }
 }
