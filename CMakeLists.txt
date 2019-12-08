@@ -12,13 +12,24 @@ endif()
 
 set(CMAKE_CXX_STANDARD 14)
 
+## Dependencies
+
+find_package(Qt5 COMPONENTS Core REQUIRED)
+
+## Configuration
+
 include(config/version.cmake)
 include(config/default.cmake)
 
 configure_file(config/bfhttpecho.h.in bfhttpecho.h @ONLY)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
+
+## Code
+
 add_subdirectory(app)
+
+## Tests
 
 enable_testing()
 
